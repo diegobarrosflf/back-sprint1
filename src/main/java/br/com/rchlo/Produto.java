@@ -17,6 +17,10 @@ public class Produto {
     private Integer pesoEmGramas;
     private String urlImagem;
 
+    public Produto(Long codigo) {
+        this.codigo = codigo;
+    }
+
     public Produto(Long codigo, String nome, String descricao, String slug, String marca, BigDecimal preco, BigDecimal precoDesconto, Cor cor, List<Tamanho> tamanhosDisponiveis, Integer pesoEmGramas, String urlImagem) {
         this.codigo = codigo;
         this.nome = nome;
