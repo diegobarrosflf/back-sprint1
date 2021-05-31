@@ -1,4 +1,4 @@
-package br.com.rchlo;
+package br.com.rchlo.domain;
 
 public enum Tamanho {
 

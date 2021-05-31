@@ -1,9 +1,9 @@
-package br.com.rchlo;
+package br.com.rchlo.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Produto {
+public class Produto implements Comparable<Produto> {
 
     private Long codigo;
     private String nome;
@@ -19,6 +19,10 @@ public class Produto {
 
     public Produto(Long codigo) {
         this.codigo = codigo;
+    }
+
+    public Produto(Cor cor) {
+        this.cor = cor;
     }
 
     public Produto(Long codigo, String nome, String descricao, String slug, String marca, BigDecimal preco, BigDecimal precoDesconto, Cor cor, List<Tamanho> tamanhosDisponiveis, Integer pesoEmGramas, String urlImagem) {
@@ -123,6 +127,14 @@ public class Produto {
         this.urlImagem = urlImagem;
     }
 
+    public boolean temDesconto() {
+        return this.getPrecoDesconto() != null;
+    }
+
+    public BigDecimal getPrecoEfetivo () {
+        return this.temDesconto() ? this.getPrecoDesconto() : this.getPreco();
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -139,4 +151,10 @@ public class Produto {
                 ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
+
+    @Override
+    public int compareTo(Produto outro) {
+        return Long.compare(this.getCodigo(), outro.getCodigo());
+    }
+
 }
