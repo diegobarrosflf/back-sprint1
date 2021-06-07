@@ -3,6 +3,7 @@ package br.com.rchlo.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ListaDeProdutos {
@@ -71,7 +72,7 @@ public class ListaDeProdutos {
         List<Produto> produtos = new ArrayList<>();
         for (Produto produto : todos()) {
             produtos.add(produto);
-        }
+        }        
         return produtos;
     }
 
