@@ -5,18 +5,16 @@ import java.util.List;
 
 import br.com.rchlo.domain.ListaDeProdutos;
 import br.com.rchlo.domain.Produto;
+import br.com.rchlo.services.ProdutoService;
 
 public class OrdenacaoPorCodigoTest {
 
 	public static void main(String[] args) {
 		
-		List<Produto> meusProdutos = ListaDeProdutos.lista();
+		ProdutoService ps = new ProdutoService();
 		
-		Collections.sort(meusProdutos);
-		
-		for (Produto produto : meusProdutos) {
-			System.out.println(produto);
-		}
+		System.out.println("<**** Produtos ordenados por código ****>");
+		ps.ordenaProdutoPorCodigo().forEach(p -> System.out.println(p));
 
 	}
 
