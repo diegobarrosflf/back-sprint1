@@ -2,7 +2,9 @@ package br.com.rchlo.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.rchlo.domain.ListaDeProdutos;
 import br.com.rchlo.domain.Produto;
@@ -10,6 +12,31 @@ import br.com.rchlo.domain.Produto;
 public class ProdutoService {
 
 	List<Produto> meusProdutos = ListaDeProdutos.lista();
+
+	public List<Produto> ordenaProdutoPorPeso(List<Produto> produtos) {
+
+		if(produtos != null) {			
+			return produtos.stream()
+					.sorted(Comparator.comparing(Produto::getPesoEmGramas))
+					.collect(Collectors
+							.toUnmodifiableList());
+		}else {
+			throw new IllegalArgumentException("Lista inválida");
+		}
+
+	}
+
+	public List<Produto> ordenaProdutoPorNome(List<Produto> produtos) {
+
+		if(produtos != null) {
+			return produtos.stream()
+					.sorted(Comparator.comparing(Produto::getNome))
+					.collect(Collectors.toUnmodifiableList());			
+		}else {
+			throw new IllegalArgumentException("Lista inválida");
+		}
+
+	}
 
 	public Produto buscarPorCodigo(Long codigo) {
 
@@ -42,16 +69,23 @@ public class ProdutoService {
 		}
 	}
 
-	public List<Produto> ordenaProdutoPorCodigo() {
-		Collections.sort(meusProdutos);
-		return Collections.unmodifiableList(meusProdutos);
+	public List<Produto> ordenaProdutoPorCodigo(List<Produto> produtos) {
+		
+		if(produtos != null) {			
+			return produtos.stream()
+					.sorted(Comparator.comparing(Produto::getCodigo))
+					.collect(Collectors
+							.toUnmodifiableList());
+		}else {
+			throw new IllegalArgumentException("Lista inválida");
+		}
 	}
 
 	public List<Produto> ordenaProdutoPorPreco(List<Produto> produtos) {
-		
-		ordena(produtos, 0, produtos.size() -1);
+
+		ordena(produtos, 0, produtos.size() - 1);
 		return Collections.unmodifiableList(produtos);
-		
+
 	}
 
 	private static void ordena(List<Produto> array, int indiceInicio, int indiceFim) {
@@ -94,7 +128,7 @@ public class ProdutoService {
 
 		while (i <= meio) {
 			array.remove(k);
-			array.add(k,aux.get(i));
+			array.add(k, aux.get(i));
 			i++;
 			k++;
 		}

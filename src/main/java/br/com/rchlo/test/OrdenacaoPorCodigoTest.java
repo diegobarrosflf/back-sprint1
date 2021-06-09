@@ -14,7 +14,7 @@ public class OrdenacaoPorCodigoTest {
 		ProdutoService ps = new ProdutoService();
 		
 		System.out.println("<**** Produtos ordenados por código ****>");
-		ps.ordenaProdutoPorCodigo().forEach(p -> System.out.println(p));
+		ps.ordenaProdutoPorCodigo(ListaDeProdutos.lista()).forEach(p -> System.out.println(p));
 
 	}
 

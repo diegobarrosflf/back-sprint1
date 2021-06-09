@@ -3,7 +3,7 @@ package br.com.rchlo.test;
 import br.com.rchlo.domain.Cor;
 import br.com.rchlo.services.ProdutoService;
 
-public class FiltrarProdutoPorCor {
+public class FiltrarProdutoPorCorTest {
 
 	public static void main(String[] args) {
 		
