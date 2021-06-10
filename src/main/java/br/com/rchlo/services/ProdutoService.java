@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.rchlo.domain.Cor;
 import br.com.rchlo.domain.ListaDeProdutos;
 import br.com.rchlo.domain.Produto;
 
@@ -15,12 +16,10 @@ public class ProdutoService {
 
 	public List<Produto> ordenaProdutoPorPeso(List<Produto> produtos) {
 
-		if(produtos != null) {			
-			return produtos.stream()
-					.sorted(Comparator.comparing(Produto::getPesoEmGramas))
-					.collect(Collectors
-							.toUnmodifiableList());
-		}else {
+		if (produtos != null) {
+			return produtos.stream().sorted(Comparator.comparing(Produto::getPesoEmGramas))
+					.collect(Collectors.toUnmodifiableList());
+		} else {
 			throw new IllegalArgumentException("Lista inválida");
 		}
 
@@ -28,30 +27,13 @@ public class ProdutoService {
 
 	public List<Produto> ordenaProdutoPorNome(List<Produto> produtos) {
 
-		if(produtos != null) {
-			return produtos.stream()
-					.sorted(Comparator.comparing(Produto::getNome))
-					.collect(Collectors.toUnmodifiableList());			
-		}else {
+		if (produtos != null) {
+			return produtos.stream().sorted(Comparator.comparing(Produto::getNome))
+					.collect(Collectors.toUnmodifiableList());
+		} else {
 			throw new IllegalArgumentException("Lista inválida");
 		}
 
-	}
-
-	public Produto buscarPorCodigo(Long codigo) {
-
-		if (codigo <= 0) {
-			throw new IllegalArgumentException("Código inválido");
-		} else {
-			Collections.sort(meusProdutos);
-			Produto produtoProcurado = new Produto(codigo);
-			int index = Collections.binarySearch(meusProdutos, produtoProcurado);
-			if (index < 0) {
-				return null;
-			} else {
-				return meusProdutos.get(index);
-			}
-		}
 	}
 
 	public List<Produto> listarProdutosPorCor(String cor) {
@@ -70,13 +52,11 @@ public class ProdutoService {
 	}
 
 	public List<Produto> ordenaProdutoPorCodigo(List<Produto> produtos) {
-		
-		if(produtos != null) {			
-			return produtos.stream()
-					.sorted(Comparator.comparing(Produto::getCodigo))
-					.collect(Collectors
-							.toUnmodifiableList());
-		}else {
+
+		if (produtos != null) {
+			return produtos.stream().sorted(Comparator.comparing(Produto::getCodigo))
+					.collect(Collectors.toUnmodifiableList());
+		} else {
 			throw new IllegalArgumentException("Lista inválida");
 		}
 	}
@@ -140,6 +120,40 @@ public class ProdutoService {
 			k++;
 		}
 
+	}
+
+	public Produto buscarPorCodigo(Long codigo) {
+
+		if (codigo <= 0) {
+			throw new IllegalArgumentException("Código inválido");
+		} else {
+			Collections.sort(meusProdutos);
+			Produto produtoProcurado = new Produto(codigo);
+			int index = Collections.binarySearch(meusProdutos, produtoProcurado);
+			if (index < 0) {
+				return null;
+			} else {
+				return meusProdutos.get(index);
+			}
+		}
+	}
+
+	public Produto buscarPorCor(Cor cor) {
+		if (cor == null) {
+			throw new IllegalArgumentException("Cor nula");
+		} else {
+			//ordenar
+			meusProdutos.sort(Comparator.comparing(Produto::getCor));
+			int index = Collections.binarySearch(meusProdutos, new Produto(cor),
+					Comparator.comparing(Produto::getCor));
+			if (index < 0) {
+				System.out.println("Desculpe, não encontramos produto nesta cor: " + cor);
+				return null;
+			} else {
+				System.out.println("Legal, encontramos um produto na cor: " + cor);
+				return meusProdutos.get(index);
+			}
+		}
 	}
 
 }
