@@ -1,21 +1,25 @@
 package br.com.rchlo.test;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.rchlo.domain.ListaDeProdutos;
 import br.com.rchlo.domain.Produto;
 import br.com.rchlo.services.ProdutoService;
 
-public class OrdenacaoPorCodigoTest {
+public class OrdenacaoPorPrecoTest {
 
 	public static void main(String[] args) {
 		
 		ProdutoService ps = new ProdutoService();
+		List<Produto> meusProdutos = ListaDeProdutos.lista();
 		
-		System.out.println("<**** Produtos ordenados por código ****>");
-		ps.ordenaProdutoPorCodigo(ListaDeProdutos.lista()).forEach(p -> System.out.println(p));
-
+		ps.ordenaProdutoPorPreco(meusProdutos);
+		
+		meusProdutos.forEach(p -> System.out.println(p.getPrecoEfetivo() + " " + p.getNome()));
+		
+		
+		
 	}
 
 }
